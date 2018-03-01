@@ -1,63 +1,57 @@
-<!DOCTYPE html>
-<html lang="pt-br">
 
-<head>
-
+<!doctype html>
+<html lang="en">
+  <head>
     <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
+    <link rel="icon" href="../../../../favicon.ico">
 
-    <title>{% block title %}Elemental Analysis Scripts{% endblock %}</title>
+    <title>EAS</title>
+
 
     {% block stylesheets %}
-        <link rel="stylesheet" href="{{ url_for('static',filename='vendor/bootstrap/dist/css/bootstrap.min.css') }}">
-        <link rel="stylesheet" href="{{ url_for('static',filename='vendor/metisMenu/dist/metisMenu.min.css') }}">
-        <link rel="stylesheet" href="{{ url_for('static',filename='vendor/startbootstrap-sb-admin-2/dist/css/sb-admin-2.css') }}">
-        <link rel="stylesheet" href="{{ url_for('static',filename='vendor/font-awesome/css/font-awesome.min.css') }}">
-        <link rel="stylesheet" href="{{ url_for('static',filename='vendor/bootstrap-datepicker/dist/css/bootstrap-datepicker.css') }}">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
         <link rel="stylesheet" href="{{ url_for('static',filename='css/styles.css') }}">
     {% endblock %}
 
-</head>
+  </head>
 
-<body>
-    <div id="wrapper">
+  <body>
 
-        <!-- Navigation -->
-        <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                  <a class="navbar-brand" href=" {{ url_for('index')}} ">Elemental Analysis Scripts</a>
-            </div>
-            <!-- /.navbar-header -->
+    <header>
+      <!-- Fixed navbar -->
+      <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+        <a class="navbar-brand" href="{{ url_for('index')}}">Elemental Analysis Scripts</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarCollapse">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+              <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Link</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link disabled" href="#">Disabled</a>
+            </li>
+          </ul>
+          <form class="form-inline mt-2 mt-md-0">
+            <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+          </form>
+        </div>
+      </nav>
+    </header>
 
-            <ul class="nav navbar-top-links navbar-right">
-               
-            </ul>
-            <!-- /.navbar-top-links -->
-
-            <div class="navbar-default sidebar" role="navigation">
-                <div class="sidebar-nav navbar-collapse">
-                    <ul class="nav" id="side-menu">
-                        {% include 'menu.html' %}       
-                    </ul>
-                </div>
-                <!-- /.sidebar-collapse -->
-            </div>
-            <!-- /.navbar-static-side -->
-        </nav>
-
-        <!-- Page Content -->
-        <div id="page-wrapper">
-            <div class="container-fluid">
-            
+    <!-- Begin page content -->
+    <main role="main" class="container">
+{% include 'menu.html' %}  
                 {% with messages = get_flashed_messages() %}
                   {% if messages %}
                     <div class="alert alert-warning">
@@ -72,21 +66,25 @@
                
                 {% block body %}
                 {% endblock %}
-           
-            </div> <!-- /.container-fluid -->
-        </div> <!-- /#page-wrapper -->
+     
 
-    </div> <!-- /#wrapper -->
+    </main>
 
-</body>
+    <footer class="footer">
+      <div class="container">
+        <span class="text-muted">EAS</span>
+      </div>
+    </footer>
+
 
     {% block javascripts %}
-        <script src="{{ url_for('static',filename='vendor/jquery/dist/jquery.min.js') }}"></script>
-        <script src="{{ url_for('static',filename='vendor/bootstrap/dist/js/bootstrap.min.js') }}"></script>
-        <script src="{{ url_for('static',filename='vendor/metisMenu/dist/metisMenu.min.js') }}"></script>
-        <script src="{{ url_for('static',filename='vendor/startbootstrap-sb-admin-2/dist/js/sb-admin-2.js') }}"></script>
-        <script src="{{ url_for('static',filename='vendor/bootstrap-datepicker/dist/js/bootstrap-datepicker.js') }}"></script>
+        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
         <script src="{{ url_for('static',filename='js/main.js') }}"></script> 
     {% endblock %}
 
+
+  </body>
 </html>
+
+
