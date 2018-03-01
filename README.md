@@ -1,12 +1,10 @@
+## Subindo o sistema
+
 Instalação das bibliotecas:
 
-    . .vendor/bin/activate
-    .vendor/bin/pip3 install -r requirements.txt
-    deactivate
-
-Para recriar o arquivo se necessário:
-
-    .vendor/bin/pip3 freeze > requirements.txt
+    virtualenv -p python3 vendor
+    . vendor/bin/activate
+    vendor/bin/pip3 install -r requirements.txt
 
 Banco de dados:
 
@@ -20,7 +18,17 @@ Para executar:
 
     python3 run.py runserver
 
-Usuário no postgres:
+## Dicas
+
+Para recriar o arquivo se necessário:
+
+    .vendor/bin/pip3 freeze > requirements.txt
+
+Sair do virtualenv:
+
+    deactivate
+
+Criar usuário no postgres:
 
     INSERT INTO users (id, username,password,email) VALUES ((SELECT nextval ('users_id_seq')),'admin','admin','admin@example.com');
 
