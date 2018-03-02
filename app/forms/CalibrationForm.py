@@ -3,10 +3,10 @@ from wtforms import StringField, BooleanField, TextField, FieldList, SelectField
 from wtforms.validators import DataRequired
 from flask_wtf.file import FileField, FileRequired, FileAllowed
 
-from app.scripts.Micromatter import serials4flask
+from Micromatter import Micromatter
 
 # TODO: read micromatter id and insert in this array
-micromatter_ids = serials4flask()
+micromatter_ids = Micromatter.serials4flask()
 
 class CalibrationForm(FlaskForm):
     

@@ -5,11 +5,10 @@
 {% block body %}
 <div class="row">
     <div class="col-xs-12 col-md-8">
-
         {% if current_user.is_authenticated %}
-            <h3>Acesse o meno ao lado com a opções!</h3>
+            {% include 'instructions.html' %}
         {% else %}
-            </h3>Faça o login ao lado.</h3>
+            </h3>Faça o <a href="{{ url_for('login') }}">login </a> no sistema!</h3>
         {% endif %}
     </div>
 </div>

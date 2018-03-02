@@ -11,12 +11,9 @@ from app.models.Calibration import Calibration
 from app.models.CalibrationFiles import CalibrationFiles
 from app.models.User import User
 
-from app.models.forms.CalibrationForm import CalibrationForm, CalibrationFormFiles
+from app.forms.CalibrationForm import CalibrationForm, CalibrationFormFiles
 
-from app.scripts.Micromatter import getSample
-from app.scripts.parseTxtWinQxas import parseTxtWinQxas
-from app.scripts.parseCsvShimadzu import parseCsvShimadzu
-from app.scripts.calculateResponseFactor import calculateResponseFactor
+import Shimadzu
 
 @app.route("/calibration/new",methods=['GET', 'POST'])
 @login_required
