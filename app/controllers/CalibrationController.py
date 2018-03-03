@@ -13,6 +13,8 @@ from app.models.User import User
 
 from app.forms.CalibrationForm import CalibrationForm, CalibrationFormFiles
 
+import Micromatter
+import WinQxas
 import Shimadzu
 
 @app.route("/calibration/new",methods=['GET', 'POST'])
@@ -32,9 +34,7 @@ def newCalibration():
 
         return redirect(url_for('showCalibration',id=calibration_data.id))
 
-    return render_template('calibration/new.html',
-        form=form
-    )
+    return render_template('calibration/new.html',form=form)
 
 @app.route("/calibration/index",methods=['GET', 'POST'])
 @login_required
@@ -74,20 +74,20 @@ def showCalibration(id):
     # get all uploaded files from this calibration
     uploads = CalibrationFiles.query.filter_by(calibration_id=calibration.id).all()
     
-    ######################################## TODO: conver to externa function
+    ######################################## TODO: convert to externa function
     # adding micrommater info
     info = {}
     ResponseFactors = {}
     for i in uploads:
 
-        info[i.micromatter_id] = getSample(i.micromatter_id)
+        info[i.micromatter_id] = Micromatter.get(i.micromatter_id)
         # txt
         txt_content = pathlib.Path('files/' + i.txt_file).read_text()
-        txt_info = parseTxtWinQxas(txt_content)
+        txt_info = WinQxas.parseTxt(txt_content)
 
         # csv
         csv_content = pathlib.Path('files/' + i.csv_file).read_text()
-        csv_info = parseCsvShimadzu(csv_content)
+        csv_info = Shimadzu.parseCsv(csv_content)
 
         ResponseFactors[i.micromatter_id] = {}
 
@@ -111,7 +111,6 @@ def showCalibration(id):
         except:
            pass
 
-        #print(ResponseFactors)
     #####################################################################
 
     return render_template('calibration/show.html',

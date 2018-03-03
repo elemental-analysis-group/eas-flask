@@ -3,10 +3,7 @@ from wtforms import StringField, BooleanField, TextField, FieldList, SelectField
 from wtforms.validators import DataRequired
 from flask_wtf.file import FileField, FileRequired, FileAllowed
 
-from Micromatter import Micromatter
-
-# TODO: read micromatter id and insert in this array
-micromatter_ids = Micromatter.serials4flask()
+import Micromatter
 
 class CalibrationForm(FlaskForm):
     
@@ -16,4 +13,6 @@ class CalibrationFormFiles(FlaskForm):
     
     csv_file = FileField(validators=[FileRequired(),FileAllowed(['csv'], 'csv only!')])
     txt_file = FileField(validators=[FileRequired(),FileAllowed(['txt'], 'txt only!')])
+
+    micromatter_ids = Micromatter.idsTuplas()
     micromatter_id = SelectField('Produce',validators=[DataRequired()], choices=micromatter_ids)
