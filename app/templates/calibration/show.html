@@ -4,7 +4,7 @@
 
 {% block body %}
 <div class="row">
-    <div class="col-xs-12 col-md-8">
+    <div class="col-xs-6 col-md-6">
         <br>
         <ul>
             <li>id: {{ calibration.id }} </li>
@@ -46,25 +46,22 @@
             <tbody>
                 {% for i in uploads %} 
                     <tr>
-                        {% set Z1 = info[i.micromatter_id][3] | int %}
-                        {% set line = 'line' %}
-                        {% if info[i.micromatter_id][5] == '' %}
-                            <td><a href="/files/{{i.txt_file}}">{{ i.micromatter_id }} </a></td>
-                            <td>{{ ResponseFactors[i.micromatter_id][Z1][line] }} </td>
-                            <td>{{ Z1 }} : {{ ResponseFactors[i.micromatter_id][Z1] }}</td>
-                        {% else %}
-                            {% set Z2 = info[i.micromatter_id][5] | int %}
-                            <td><a href="/files/{{i.txt_file}}"> {{ i.micromatter_id }} </a></td>
-                            <td></td>
-                            <td>
-                                {{ Z1 }} : {{ ResponseFactors[i.micromatter_id][Z1] }} <br>
-                                {{ Z2 }} : {{ ResponseFactors[i.micromatter_id][Z2] }}
-                            </td>
-                        {% endif %}           
+                        <td>{{ i.micromatter_id }} </td>
+                        <td> Not implemented </td>
+                        <td> 
+                        {% for element in elements[i.micromatter_id] %}
+                            {{ element }}: {{ ResponseFactors[i.micromatter_id][element] }} <br>
+                        {% endfor %}
+                        </td>
+          
                     </tr>
                 {% endfor %}
             </tbody>
     </table>
+    </div>
+
+    <div class="col-xs-6 col-md-6">
+        <img src="/plot/{{ calibration.id }}"> 
     </div>
 </div>
 {% endblock %}

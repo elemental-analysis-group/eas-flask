@@ -6,3 +6,4 @@ DEBUG = True
 SQLALCHEMY_DATABASE_URI = 'postgres://eas:eas@localhost:5432/eas'
 SQLALCHEMY_TRACK_MODIFICATIONS = True
 SECRET_KEY = '123'
+FILES='/home/thiago/.data/eas'
