@@ -14,10 +14,10 @@ from app.models.User import User
 from app.forms.CalibrationForm import CalibrationForm, CalibrationFormFiles
 from app.utils.RF import RF
 
-#import micromatter
-#import winQxas
-#import shimadzu
-#from responseFactor import responseFactor
+from lib import micromatter
+from lib import winqxas
+from lib import shimadzu
+from lib.responseFactor import responseFactor
 
 @app.route("/calibration/new",methods=['GET', 'POST'])
 @login_required

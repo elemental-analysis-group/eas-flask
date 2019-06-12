@@ -28,7 +28,7 @@ Dicas:
 
 Criar usuário no banco de dados:
 
-    INSERT INTO users (id, username,password,email) VALUES ((SELECT nextval ('users_id_seq')),'admin','admin','admin@example.com');
+    INSERT INTO users (id, username,password,email) VALUES (1,'admin','admin','admin@example.com');
 
 Gerar nova migration:
 
