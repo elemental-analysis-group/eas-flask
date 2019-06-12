@@ -2,11 +2,11 @@
 
 Instalação das bibliotecas:
 
-    virtualenv -p python3 vendor
-    . vendor/bin/activate
-    vendor/bin/pip3 install -r requirements.txt
+    virtualenv -p python3 .eas-flask
+    . .eas-flask/bin/activate
+    .eas-flask/bin/pip3 install -r requirements.txt
 
-Banco de dados:
+Criar tabelas no banco de dados:
 
     python3 run.py db upgrade
 
@@ -22,13 +22,18 @@ Para executar:
 
 Para recriar o arquivo se necessário:
 
-    .vendor/bin/pip3 freeze > requirements.txt
+    .eas-flask/bin/pip3 freeze > requirements.txt
 
 Sair do virtualenv:
 
     deactivate
 
-Criar usuário no postgres:
+Dicas:
+
+Criar usuário no banco de dados:
 
     INSERT INTO users (id, username,password,email) VALUES ((SELECT nextval ('users_id_seq')),'admin','admin','admin@example.com');
 
+Gerar nova migration:
+
+    python3 run.py db migrate
