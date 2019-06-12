@@ -1,6 +1,7 @@
 alembic==0.9.6
 click==6.7
--e git+https://github.com/elemental-analysis-group/eas.git@master#egg=eas
+cycler==0.10.0
+-e git+https://github.com/elemental-analysis-group/eas.git@255ef367605bdf1df7fef0e8005c377f506bd680#egg=eas
 Flask==0.12.2
 Flask-Login==0.4.0
 Flask-Migrate==2.1.1
@@ -9,17 +10,21 @@ Flask-SQLAlchemy==2.3.2
 Flask-WTF==0.14.2
 itsdangerous==0.24
 Jinja2==2.9.6
+kiwisolver==1.1.0
 Mako==1.0.7
 MarkupSafe==1.0
+matplotlib==2.2.2
 numpy==1.14.1
 pathlib==1.0.1
 psycopg2==2.7.3.2
+PyMySQL==0.9.3
+pyparsing==2.4.0
 python-dateutil==2.6.1
 python-editor==1.0.3
+pytz==2019.1
 pyxray==1.3.3
 six==1.11.0
 SQLAlchemy==1.1.14
 tabulate==0.8.2
 Werkzeug==0.12.2
 WTForms==2.1
-matplotlib==2.2.2

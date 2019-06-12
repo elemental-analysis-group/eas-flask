@@ -10,10 +10,6 @@ Criar tabelas no banco de dados:
 
     python3 run.py db upgrade
 
-Criar pasta files:
-
-    mkdir files
-    
 Para executar:
 
     python3 run.py runserver
