@@ -1,6 +1,6 @@
 alembic==0.9.6
 click==6.7
--e git+https://github.com/thiagogomesverissimo/eas.git@master#egg=eas
+-e git+https://github.com/elemental-analysis-group/eas.git@master#egg=eas
 Flask==0.12.2
 Flask-Login==0.4.0
 Flask-Migrate==2.1.1
