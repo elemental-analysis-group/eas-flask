@@ -2,9 +2,9 @@
 
 Instalação das bibliotecas:
 
-    virtualenv -p python3 vendor
-    . vendor/bin/activate
-    vendor/bin/pip3 install -r requirements.txt
+    virtualenv -p python3 .eas-flask
+    . .eas-flask/bin/activate
+    .eas-flask/bin/pip3 install -r requirements.txt
 
 Banco de dados:
 
@@ -22,7 +22,7 @@ Para executar:
 
 Para recriar o arquivo se necessário:
 
-    .vendor/bin/pip3 freeze > requirements.txt
+    .eas-flask/bin/pip3 freeze > requirements.txt
 
 Sair do virtualenv:
 
