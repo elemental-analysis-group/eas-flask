@@ -14,10 +14,10 @@ from app.models.User import User
 from app.forms.CalibrationForm import CalibrationForm, CalibrationFormFiles
 from app.utils.RF import RF
 
-from lib import micromatter
-from lib import winqxas
-from lib import shimadzu
-from lib.responseFactor import responseFactor
+from eas import micromatter
+from eas import winqxas
+from eas import shimadzu
+from eas.responseFactor import responseFactor
 
 @app.route("/calibration/new",methods=['GET', 'POST'])
 @login_required
@@ -76,16 +76,17 @@ def showCalibration(id):
         return redirect(url_for('showCalibration',id=calibration.id))
 
     # get all uploaded files from this calibration
-    uploads = CalibrationFiles.query.filter_by(calibration_id=calibration.id).all()
+    #uploads = CalibrationFiles.query.filter_by(calibration_id=calibration.id).all()
     
-    info, ResponseFactors, elements = RF(uploads)
+    #info, ResponseFactors, elements = RF(uploads)
+
 
     return render_template('calibration/show.html',
             calibration=calibration,
-            form=form,
-            info=info,
-            uploads = uploads,
-            ResponseFactors = ResponseFactors,
-            elements = elements
+           form=form,
+    #       info=info,
+    #         uploads = uploads,
+    #        ResponseFactors = ResponseFactors,
+    #        elements = elements
     )
 
