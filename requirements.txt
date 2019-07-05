@@ -1,7 +1,7 @@
 alembic==0.9.6
 click==6.7
 cycler==0.10.0
--e git+https://github.com/elemental-analysis-group/eas.git@255ef367605bdf1df7fef0e8005c377f506bd680#egg=eas
+-e git+https://github.com/elemental-analysis-group/eas.git@master#egg=eas
 Flask==0.12.2
 Flask-Login==0.4.0
 Flask-Migrate==2.1.1
