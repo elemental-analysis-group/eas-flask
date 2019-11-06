@@ -51,36 +51,34 @@ def indexCalibration():
 def showCalibration(id):
     form = CalibrationFormFiles()
     calibration = Calibration.query.filter_by(id=id).first()
-
+    
     if form.validate_on_submit():
-        begin = 'micromatter' + str(form.micromatter_id.data) + '_' + 'calibration_' + str(calibration.id) + '_'
+
+        begin = 'calibration_' + str(calibration.id) + '_'
+
         # csv
         csv_filename = begin + secure_filename(form.csv_file.data.filename)
-        #form.csv_file.data.save(os.path.join('files', csv_filename))
         form.csv_file.data.save( app.config['FILES'] + '/' + csv_filename )
 
         # txt
         txt_filename = begin + secure_filename(form.txt_file.data.filename)
-        #form.txt_file.data.save(os.path.join('files', txt_filename))
         form.txt_file.data.save( app.config['FILES'] + '/' + txt_filename)
 
-        calibration_files_data = CalibrationFiles(
-            csv_file = csv_filename,
-            txt_file = txt_filename, 
-            micromatter_id = form.micromatter_id.data, 
-            calibration_id = calibration.id
-        )
-        db.session.add(calibration_files_data)
-        db.session.commit()
+#        calibration_files_data = CalibrationFiles(
+#            csv_file = csv_filename,
+#            txt_file = txt_filename, 
+#            calibration_id = calibration.id
+#        )
+#        db.session.add(calibration_files_data)
+#        db.session.commit()
 
         return redirect(url_for('showCalibration',id=calibration.id))
 
     # get all uploaded files from this calibration
     #uploads = CalibrationFiles.query.filter_by(calibration_id=calibration.id).all()
     
-    #info, ResponseFactors, elements = RF(uploads)
-
-
+    #info, ResponseFactors, elements = RF(uploads) """
+    
     return render_template('calibration/show.html',
             calibration=calibration,
            form=form,
@@ -89,4 +87,3 @@ def showCalibration(id):
     #        ResponseFactors = ResponseFactors,
     #        elements = elements
     )
-

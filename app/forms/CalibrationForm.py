@@ -13,6 +13,3 @@ class CalibrationFormFiles(FlaskForm):
     
     csv_file = FileField(validators=[FileRequired(),FileAllowed(['csv'], 'csv only!')])
     txt_file = FileField(validators=[FileRequired(),FileAllowed(['txt'], 'txt only!')])
-
-    #micromatter_ids = micromatter.serialsAsTuples()
-    #micromatter_id = SelectField('Produce',validators=[DataRequired()], choices=micromatter_ids)
