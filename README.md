@@ -2,9 +2,9 @@
 
 Instalação das bibliotecas:
 
-    virtualenv -p python3 .eas-flask
-    . .eas-flask/bin/activate
-    .eas-flask/bin/pip3 install -r requirements.txt
+    virtualenv -p python3 .virtualenv
+    source .virtualenv/bin/activate
+    pip3 install -r requirements.txt
 
 Criar tabelas no banco de dados:
 
@@ -18,7 +18,7 @@ Para executar:
 
 Para recriar o arquivo se necessário:
 
-    .eas-flask/bin/pip3 freeze > requirements.txt
+     pip3 freeze > requirements.txt
 
 Sair do virtualenv:
 
