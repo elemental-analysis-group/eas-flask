@@ -2,5 +2,6 @@
 *~
 __pycache__
 *.pyc
-.eas-flask/
 files
+
+.virtualenv

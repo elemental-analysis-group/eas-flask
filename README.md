@@ -28,8 +28,15 @@ Dicas:
 
 Criar usuário no banco de dados:
 
+    sqlite3 /tmp/test.db
     INSERT INTO users (id, username,password,email) VALUES (1,'admin','admin','admin@example.com');
+    .quit
 
 Gerar nova migration:
 
     python3 run.py db migrate
+
+Atualizar tudo do requiriments:
+
+    pip install --ignore-installed -r requirements.txt
+    pip3 freeze > requirements.txt

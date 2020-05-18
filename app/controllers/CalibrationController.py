@@ -14,10 +14,8 @@ from app.models.User import User
 from app.forms.CalibrationForm import CalibrationForm, CalibrationFormFiles
 from app.utils.RF import RF
 
-from eas import micromatter
-from eas import winqxas
-from eas import shimadzu
-from eas.responseFactor import responseFactor
+from elemental_analysis_tools import *
+from elemental_analysis_tools.responseFactor import responseFactor
 
 @app.route("/calibration/new",methods=['GET', 'POST'])
 @login_required
