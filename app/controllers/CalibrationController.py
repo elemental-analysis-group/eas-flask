@@ -15,7 +15,6 @@ from app.forms.CalibrationForm import CalibrationForm, CalibrationFormFiles
 from app.utils.RF import RF
 
 from elemental_analysis_tools import *
-from elemental_analysis_tools.responseFactor import responseFactor
 
 @app.route("/calibration/new",methods=['GET', 'POST'])
 @login_required
@@ -52,6 +51,7 @@ def showCalibration(id):
     
     if form.validate_on_submit():
 
+        # pattern to filenames: calibration_ID_filename.txt|csv
         begin = 'calibration_' + str(calibration.id) + '_'
 
         # csv
@@ -62,26 +62,35 @@ def showCalibration(id):
         txt_filename = begin + secure_filename(form.txt_file.data.filename)
         form.txt_file.data.save( app.config['FILES'] + '/' + txt_filename)
 
-#        calibration_files_data = CalibrationFiles(
-#            csv_file = csv_filename,
-#            txt_file = txt_filename, 
-#            calibration_id = calibration.id
-#        )
-#        db.session.add(calibration_files_data)
-#        db.session.commit()
+        # Vamos supor que neste caso o código da micromatter está no nome do arquivo
+        standard_target = secure_filename(form.csv_file.data.filename).split('.')[0]
+
+        # TODO: Validar se o csv e txt possuem o mesmo nome
+        # TODO: Não permissir repeticação?
+
+        # save filename and location on database
+        calibration_files_data = CalibrationFiles(
+            csv_file = csv_filename,
+            txt_file = txt_filename,
+            standard_target = standard_target,
+            calibration_id = calibration.id
+        )
+        db.session.add(calibration_files_data)
+        db.session.commit()
 
         return redirect(url_for('showCalibration',id=calibration.id))
 
     # get all uploaded files from this calibration
-    #uploads = CalibrationFiles.query.filter_by(calibration_id=calibration.id).all()
+    uploads = CalibrationFiles.query.filter_by(calibration_id=calibration.id).all()
     
-    #info, ResponseFactors, elements = RF(uploads) """
+    info = RF(uploads)
+    #info, ResponseFactors, elements = RF(uploads)
     
     return render_template('calibration/show.html',
             calibration=calibration,
-           form=form,
-    #       info=info,
-    #         uploads = uploads,
+            form=form,
+            info=info,
+            uploads = uploads,
     #        ResponseFactors = ResponseFactors,
     #        elements = elements
     )

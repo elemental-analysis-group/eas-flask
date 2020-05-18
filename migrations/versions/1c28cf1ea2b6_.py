@@ -38,7 +38,7 @@ def upgrade():
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('csv_file', sa.Text(), nullable=True),
     sa.Column('txt_file', sa.Text(), nullable=True),
-    sa.Column('micromatter_id', sa.Text(), nullable=True),
+    sa.Column('standard_target', sa.Text(), nullable=True),
     sa.Column('calibration_id', sa.Integer(), nullable=True),
     sa.ForeignKeyConstraint(['calibration_id'], ['calibrations.id'], ),
     sa.PrimaryKeyConstraint('id')

@@ -18,8 +18,8 @@
             {{ form.csrf_token }}
 
             <div class="well">
-                <label> Micromatter ID</label>
-                {{ form.micromatter_id }}
+                <label>  standard_target (Micromatter) </label>
+                 {{ form.standard_target }}
             </div>
 
             <div class="well">
@@ -47,12 +47,12 @@
             <tbody>
                 {% for i in uploads %} 
                     <tr>
-                        <td>{{ i.micromatter_id }} </td>
+                        <td>{{ i.standard_target }} </td>
                         <td> Not implemented </td>
-                        <td> 
+                        <td> {#
                         {% for element in elements[i.micromatter_id] %}
                             {{ element }}: {{ ResponseFactors[i.micromatter_id][element] }} <br>
-                        {% endfor %}
+                        {% endfor %} #}
                         </td>
           
                     </tr>

@@ -3,18 +3,18 @@ import os
 import pathlib
 from app import app, db, lm
 
-#import micromatter
-#import winqxas
-#import shimadzu
-#from responseFactor import responseFactor
+from elemental_analysis_tools import micromatter
 
 def RF(uploads):
     info = {}
     ResponseFactors = {}
     elements= {}
-#    for i in uploads:
+    for i in uploads:
+        # a ideia é que seja genérico para qualquer alvo padrão, mas por hora fixar na micromatter
+        file_path = os.path.join(os.path.dirname(__file__), 'micromatter-table-iag.csv')
+        micromatter_file = pathlib.Path(file_path).read_text()
 
-#        info[i.micromatter_id] = Micromatter.get(i.micromatter_id)
+        info[i.standard_target] = micromatter.get(i.standard_target, micromatter_file)
 
         # txt
 #        txt_content = pathlib.Path( app.config['FILES'] + '/' + i.txt_file).read_text()
@@ -41,4 +41,4 @@ def RF(uploads):
 #               pass
 
 #    return (info, ResponseFactors, elements)
-    return ('')
+    return (info)
