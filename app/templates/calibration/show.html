@@ -5,70 +5,35 @@
 {% block body %}
 
 <div class="row">
-    <div class="col-xs-6 col-md-6">
+    <div class="col-sm">
         <br>
-        <ul>
-            <li>id: {{ calibration.id }} </li>
-            <li>description: {{ calibration.description}} </li>
-            <li>user: {{ calibration.user_id}} </li>
-        </ul>
-      
-        <form method="POST" enctype="multipart/form-data">
-
-            {{ form.csrf_token }}
-
-            <div class="well">
-                <label> <b>csv file from EDX</b></label>
-                {{ form.csv_file }} 
+        <div class="card">
+            <div class="card-header"><b>Enviar arquivos para compor a calibração: {{ calibration.description}}</b></div>
+            <div class="card-body">
+                {% include 'calibration/upload_form.html' %}
             </div>
-            
-            <div class="well">
-                <label><b> txt file from WinQxas </b></label>
-                {{ form.txt_file }}
+        </div>
+        <br>
+        <div class="card">
+            <div class="card-header"><b>Arquivos Enviados:</b></div>
+            <div class="card-body">
+                {% include 'calibration_files/table.html' %}
             </div>
-
-            <div class="well">
-                <label> <b>Código Micromatter que esse txt e csv se referem: </b></label>
-                 {{ form.standard_target }}
-            </div>
-            <br>
-
-            <button type="submit" class="btn btn-primary"> Send </button>
-
-        </form>
-        
-        <table class="table table-striped">
-            <thead>
-                <tr>
-                    <th>Micromatter</th>
-                    <th>Line</th>
-                    <th>Z: R +- error</th>
-                    <th>Actions</th>
-                </td>
-            </thead>
-            <tbody>
-                {% for i in uploads %} 
-                    <tr>
-                        <td><a href="/calibration_files/{{i.id}}"> {{ i.standard_target }} </a></td>
-                        <td> Not implemented </td>
-                        <td> {#
-                        {% for element in elements[i.micromatter_id] %}
-                            {{ element }}: {{ ResponseFactors[i.micromatter_id][element] }} <br>
-                        {% endfor %} #}
-                        </td>
-                        <td>
-                            <a href="/calibration_files/{{i.id}}/delete"><i class="fas fa-trash-alt"></i></a>
-                        </td>
-          
-                    </tr>
-                {% endfor %}
-            </tbody>
-    </table>
-    </div>
-
-    <div class="col-xs-6 col-md-6">
-        <img src="/plot/{{ calibration.id }}"> 
+        </div>
     </div>
 </div>
 
+<br><br>
+
+<div class="row">
+
+    <div class="col-xs-6 col-md-6">
+        {% include 'calibration/final_factors_table.html' %}
+
+    </div>
+
+    <div class="col-xs-6 col-md-6">
+        <img class="col-md-12" src="/plot/{{ calibration.id }}"> 
+    </div>
+</div>
 {% endblock %}

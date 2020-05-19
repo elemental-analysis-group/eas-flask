@@ -1,0 +1,22 @@
+<form method="POST" enctype="multipart/form-data">
+
+    {{ form.csrf_token }}
+
+    <div class="well">
+        <label> <b>csv file from EDX</b></label>
+        {{ form.csv_file }} 
+    </div>
+    
+    <div class="well">
+        <label><b> txt file from WinQxas </b></label>
+        {{ form.txt_file }}
+    </div>
+
+    <div class="well">
+        <label> <b>Código Micromatter que esse txt e csv se referem: </b></label>
+         {{ form.standard_target }}
+    </div>
+
+    <button type="submit" class="btn btn-primary"> Send </button>
+
+</form>

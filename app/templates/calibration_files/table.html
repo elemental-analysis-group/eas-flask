@@ -1,0 +1,27 @@
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Micromatter</th>
+            <th>Z: R +- error</th>
+            <th>Actions</th>
+        </td>
+    </thead>
+    <tbody>
+        {% for i in uploads %} 
+            <tr>
+                <td><a href="/calibration_files/{{i.id}}"> {{ i.standard_target }} </a></td>
+                <td>
+                {% for element in elements[i.standard_target] %}
+                    <b>{{ element }}</b>: {{ "%.2E" % ResponseFactors[i.standard_target][element] }} +/-
+                    {{ "%.1E" % ResponseFactorsErrors[i.standard_target][element] }}
+                    <br>
+                {% endfor %}
+                </td>
+                <td>
+                    <a href="/calibration_files/{{i.id}}/delete"><i class="fas fa-trash-alt"></i></a>
+                </td>
+  
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>

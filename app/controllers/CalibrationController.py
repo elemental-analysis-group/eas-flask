@@ -14,8 +14,6 @@ from app.models.User import User
 from app.forms.CalibrationForm import CalibrationForm, CalibrationFilesForm
 from app.utils.Utils import Utils
 
-from elemental_analysis_tools import *
-
 @app.route("/calibration/new",methods=['POST','GET'])
 @login_required
 def newCalibration():
@@ -73,14 +71,14 @@ def showCalibration(id):
     # get all uploaded files from this calibration
     uploads = CalibrationFiles.query.filter_by(calibration_id=calibration.id).all()
     
-    info = Utils(uploads)
-    #info, ResponseFactors, elements = RF(uploads)
+    info, elements, ResponseFactors, ResponseFactorsErrors,response_factors_final = Utils(uploads)
     
     return render_template('calibration/show.html',
             calibration=calibration,
             form=form,
             info=info,
             uploads = uploads,
-    #        ResponseFactors = ResponseFactors,
-    #        elements = elements
+            elements = elements,
+            ResponseFactors = ResponseFactors,
+            ResponseFactorsErrors = ResponseFactorsErrors
     )

@@ -7,16 +7,27 @@ from matplotlib.backends.backend_agg import FigureCanvasAgg as FigureCanvas
 from matplotlib.figure import Figure
 from flask_login import login_user, logout_user, login_required,current_user
 
+from app.models.Calibration import Calibration
+from app.models.CalibrationFiles import CalibrationFiles
+from app.utils.Utils import Utils
+
+from elemental_analysis_tools.fitResponseFactor import plotFit
+
 @app.route("/plot/<id>",methods=['GET', 'POST'])
 @login_required
 def plot(id):
-    fig = Figure()
-    axis = fig.add_subplot(1, 1, 1)
 
-    xs = range(100)
-    ys = [random.randint(1, 50) for x in xs]
+    calibration = Calibration.query.filter_by(id=id).first()
+    uploads = CalibrationFiles.query.filter_by(calibration_id=calibration.id).all()
+    info, elements, ResponseFactors, ResponseFactorsErrors,response_factors_final = Utils(uploads)
 
-    axis.plot(xs, ys)
+    Z = response_factors_final['Z']
+    Y = response_factors_final['Y']
+    Yerror = response_factors_final['Yerror']
+    plt = plotFit(Z,Y,Yerror,start=11,end=50,degree=10,fit=False)
+    fig = plt.gcf()
+
+    # Faz a mágica para devolver um response do tipo imagem
     canvas = FigureCanvas(fig)
     output = BytesIO()
     canvas.print_png(output)
