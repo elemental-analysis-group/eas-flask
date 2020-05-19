@@ -5,7 +5,7 @@ from app import app, db, lm
 
 from elemental_analysis_tools import micromatter
 
-def RF(uploads):
+def Utils(uploads):
     info = {}
     ResponseFactors = {}
     elements= {}

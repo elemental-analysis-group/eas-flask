@@ -18,19 +18,20 @@
             {{ form.csrf_token }}
 
             <div class="well">
-                <label>  standard_target (Micromatter) </label>
-                 {{ form.standard_target }}
-            </div>
-
-            <div class="well">
-                <label> csv file from EDX</label>
+                <label> <b>csv file from EDX</b></label>
                 {{ form.csv_file }} 
             </div>
             
             <div class="well">
-                <label> txt file from WinQxas</label>
+                <label><b> txt file from WinQxas </b></label>
                 {{ form.txt_file }}
             </div>
+
+            <div class="well">
+                <label> <b>Código Micromatter que esse txt e csv se referem: </b></label>
+                 {{ form.standard_target }}
+            </div>
+            <br>
 
             <button type="submit" class="btn btn-primary"> Send </button>
 
@@ -39,20 +40,24 @@
         <table class="table table-striped">
             <thead>
                 <tr>
-                    <th>Micromatter ID</th>
+                    <th>Micromatter</th>
                     <th>Line</th>
                     <th>Z: R +- error</th>
+                    <th>Actions</th>
                 </td>
             </thead>
             <tbody>
                 {% for i in uploads %} 
                     <tr>
-                        <td>{{ i.standard_target }} </td>
+                        <td><a href="/calibration_files/{{i.id}}"> {{ i.standard_target }} </a></td>
                         <td> Not implemented </td>
                         <td> {#
                         {% for element in elements[i.micromatter_id] %}
                             {{ element }}: {{ ResponseFactors[i.micromatter_id][element] }} <br>
                         {% endfor %} #}
+                        </td>
+                        <td>
+                            <a href="/calibration_files/{{i.id}}/delete"><i class="fas fa-trash-alt"></i></a>
                         </td>
           
                     </tr>

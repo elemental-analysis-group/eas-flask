@@ -9,7 +9,7 @@ class Calibration(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
     user = db.relationship('User',foreign_keys=user_id)
 
-    def __init__(self, description,user_id):
+    def __init__(self, description, user_id):
         self.description = description
         self.user_id = user_id
 

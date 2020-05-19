@@ -11,18 +11,16 @@ from app.models.Calibration import Calibration
 from app.models.CalibrationFiles import CalibrationFiles
 from app.models.User import User
 
-from app.forms.CalibrationForm import CalibrationForm, CalibrationFormFiles
-from app.utils.RF import RF
+from app.forms.CalibrationForm import CalibrationForm, CalibrationFilesForm
+from app.utils.Utils import Utils
 
 from elemental_analysis_tools import *
 
-@app.route("/calibration/new",methods=['GET', 'POST'])
+@app.route("/calibration/new",methods=['POST','GET'])
 @login_required
 def newCalibration():
-    print()
     form = CalibrationForm()
     if form.validate_on_submit():
-
         # save in database
         calibration_data = Calibration(
             description = form.description.data,
@@ -30,23 +28,20 @@ def newCalibration():
         )
         db.session.add(calibration_data)
         db.session.commit()
-
         return redirect(url_for('showCalibration',id=calibration_data.id))
-
     return render_template('calibration/new.html',form=form)
 
-@app.route("/calibration/index",methods=['GET', 'POST'])
+
+@app.route("/calibration/index",methods=['GET'])
 @login_required
 def indexCalibration():
     calibrations = Calibration.query.all()
-    return render_template('calibration/index.html',
-        calibrations=calibrations)
+    return render_template('calibration/index.html',calibrations=calibrations)
 
-@app.route("/calibration",defaults={'id': 0})
-@app.route("/calibration/<id>",methods=['GET', 'POST'])
+@app.route("/calibration/<id>",methods=['POST','GET'])
 @login_required
 def showCalibration(id):
-    form = CalibrationFormFiles()
+    form = CalibrationFilesForm()
     calibration = Calibration.query.filter_by(id=id).first()
     
     if form.validate_on_submit():
@@ -62,17 +57,11 @@ def showCalibration(id):
         txt_filename = begin + secure_filename(form.txt_file.data.filename)
         form.txt_file.data.save( app.config['FILES'] + '/' + txt_filename)
 
-        # Vamos supor que neste caso o código da micromatter está no nome do arquivo
-        standard_target = secure_filename(form.csv_file.data.filename).split('.')[0]
-
-        # TODO: Validar se o csv e txt possuem o mesmo nome
-        # TODO: Não permissir repeticação?
-
         # save filename and location on database
         calibration_files_data = CalibrationFiles(
             csv_file = csv_filename,
             txt_file = txt_filename,
-            standard_target = standard_target,
+            standard_target = form.standard_target.data,
             calibration_id = calibration.id
         )
         db.session.add(calibration_files_data)
@@ -80,10 +69,11 @@ def showCalibration(id):
 
         return redirect(url_for('showCalibration',id=calibration.id))
 
+    
     # get all uploaded files from this calibration
     uploads = CalibrationFiles.query.filter_by(calibration_id=calibration.id).all()
     
-    info = RF(uploads)
+    info = Utils(uploads)
     #info, ResponseFactors, elements = RF(uploads)
     
     return render_template('calibration/show.html',

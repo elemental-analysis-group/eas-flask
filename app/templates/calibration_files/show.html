@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ super() }} - show {% endblock %}
+
+{% block body %}
+
+<div class="row">
+    <div class="col-xs-6 col-md-6">
+        <br>
+        <ul>
+            <li><b>id:</b> {{ calibration.id }} </li>
+            <li><b>description:</b> {{ calibration.description}} </li>
+            <li><b>user:</b> {{ calibration.user_id}} </li>
+        </ul>
+
+        <ul>
+            <li><b>csv_file:</b> {{ calibration_files.csv_file}} </li>
+            <li><b>txt_file:</b> {{ calibration_files.txt_file}} </li>
+            <li><b>standard_target:</b> {{ calibration_files.standard_target}} </li>
+        </ul>
+        <a href="/calibration/{{ calibration.id }}">voltar</a>
+    </div>
+</div>
+
+{% endblock %}
