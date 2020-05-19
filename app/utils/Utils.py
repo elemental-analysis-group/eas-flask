@@ -9,7 +9,7 @@ from elemental_analysis_tools import winqxas
 from elemental_analysis_tools import shimadzu
 from elemental_analysis_tools.responseFactor import responseFactor
 
-def Utils(uploads):
+def prepare(uploads):
     """
     Esse método prepara as variáveis para o template:
     elements: 
@@ -19,7 +19,8 @@ def Utils(uploads):
     info = {}
     ResponseFactors = {}
     ResponseFactorsErrors = {}
-    elements= {}
+    elements = {}
+    uploads_metadata = {}
 
     Z = []
     Y = []
@@ -67,7 +68,5 @@ def Utils(uploads):
 
     # ATENÇÃO: Falta tirar média
     response_factors_final = {'Z': Z , 'Y': Y , 'Yerror': Yerror}
-    #{'Z': Z , 'Y': Y , 'Yerror': Yerror}
-    #print(Yerror)
 
     return (info, elements, ResponseFactors, ResponseFactorsErrors, response_factors_final)

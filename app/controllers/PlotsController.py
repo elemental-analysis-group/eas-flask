@@ -9,7 +9,7 @@ from flask_login import login_user, logout_user, login_required,current_user
 
 from app.models.Calibration import Calibration
 from app.models.CalibrationFiles import CalibrationFiles
-from app.utils.Utils import Utils
+from app.utils.Utils import prepare
 
 from elemental_analysis_tools.fitResponseFactor import plotFit
 
@@ -19,7 +19,7 @@ def plot(id):
 
     calibration = Calibration.query.filter_by(id=id).first()
     uploads = CalibrationFiles.query.filter_by(calibration_id=calibration.id).all()
-    info, elements, ResponseFactors, ResponseFactorsErrors,response_factors_final = Utils(uploads)
+    info, elements, ResponseFactors, ResponseFactorsErrors,response_factors_final = prepare(uploads)
 
     Z = response_factors_final['Z']
     Y = response_factors_final['Y']

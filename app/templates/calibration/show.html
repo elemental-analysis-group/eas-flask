@@ -5,6 +5,19 @@
 {% block body %}
 
 <div class="row">
+
+    <div class="col-xs-6 col-md-6">
+        {% include 'calibration/final_factors_table.html' %}
+
+    </div>
+
+    <div class="col-xs-6 col-md-6">
+        <img class="col-md-12" src="/plot/{{ calibration.id }}"> 
+    </div>
+</div>
+
+
+<div class="row">
     <div class="col-sm">
         <br>
         <div class="card">
@@ -25,15 +38,4 @@
 
 <br><br>
 
-<div class="row">
-
-    <div class="col-xs-6 col-md-6">
-        {% include 'calibration/final_factors_table.html' %}
-
-    </div>
-
-    <div class="col-xs-6 col-md-6">
-        <img class="col-md-12" src="/plot/{{ calibration.id }}"> 
-    </div>
-</div>
 {% endblock %}

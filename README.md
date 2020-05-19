@@ -8,6 +8,7 @@ Instalação das bibliotecas:
 
 Criar tabelas no banco de dados:
 
+    cp config.py.example config.py # editar
     python3 run.py db upgrade
 
 Para executar:
