@@ -8,10 +8,19 @@
     <br />
      <form method="POST" enctype="multipart/form-data">
         {{ form.csrf_token }}
-        {{ form.description.label }}: {{ form.description(size=20) }}
-        <button type="submit" class="btn btn-success"> Cadastrar </button>
+        {{ form.description(size=20) }}
+        <button type="submit" class="btn btn-success"> Nova calibração vazia </button>
     </form>
 
+    <br><br>
+
+    <form method="POST" enctype="multipart/form-data" action="/dados_exemplo">
+        {{ form.csrf_token }}
+        {{ form.description(size=20) }}
+        <button type="submit" class="btn btn-success"> Nova calibração com dados de exemplo </button>
+    </form>
+    
+    
     </br>
     </div>
 </div>

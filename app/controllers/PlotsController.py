@@ -2,7 +2,7 @@ import random
 from io import BytesIO
 
 from app import app
-from flask import Flask, make_response
+from flask import Flask, make_response, redirect
 from matplotlib.backends.backend_agg import FigureCanvasAgg as FigureCanvas
 from matplotlib.figure import Figure
 from flask_login import login_user, logout_user, login_required,current_user
