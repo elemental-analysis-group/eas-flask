@@ -4,10 +4,8 @@ import pathlib
 from app import app, db, lm
 import numpy
 
-from elemental_analysis_tools import micromatter
-from elemental_analysis_tools import winqxas
-from elemental_analysis_tools import shimadzu
-from elemental_analysis_tools.responseFactor import responseFactor
+from app.elemental_analysis_tools_temp import *
+from app.elemental_analysis_tools_temp.responseFactor import responseFactor
 
 def prepare(uploads):
     """

@@ -6,7 +6,7 @@ from flask_wtf.file import FileField, FileRequired, FileAllowed
 import sys
 import os
 import pathlib
-from elemental_analysis_tools import micromatter
+from app.elemental_analysis_tools_temp import micromatter
 
 class CalibrationForm(FlaskForm):
     description = TextField('description', validators=[DataRequired()])

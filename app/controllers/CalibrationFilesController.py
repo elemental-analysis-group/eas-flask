@@ -13,7 +13,7 @@ from app.models.User import User
 
 from app.forms.CalibrationForm import CalibrationForm, CalibrationFilesForm
 
-from elemental_analysis_tools import *
+from app.elemental_analysis_tools_temp import *
 
 @app.route("/calibration_files/<id>",methods=['POST','GET'])
 @login_required

@@ -11,7 +11,7 @@ from app.models.Calibration import Calibration
 from app.models.CalibrationFiles import CalibrationFiles
 from app.utils.Utils import prepare
 
-from elemental_analysis_tools.fitResponseFactor import plotFit
+from app.elemental_analysis_tools_temp.fitResponseFactor import plotFit
 
 @app.route("/plot/<id>",methods=['GET', 'POST'])
 @login_required
