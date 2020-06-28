@@ -10,6 +10,7 @@ from app.elemental_analysis_tools_temp import micromatter
 
 class CalibrationForm(FlaskForm):
     description = TextField('description', validators=[DataRequired()])
+    init_type = TextField('init_type',validators=[Optional()])
 
 class CalibrationFilesForm(FlaskForm):
     csv_file = FileField(validators=[FileRequired(),FileAllowed(['csv'], 'csv only!')])
@@ -20,3 +21,4 @@ class CalibrationFilesForm(FlaskForm):
     choices = micromatter.serialsAsTuples(micromatter_file)
 
     standard_target = SelectField('standard_target',coerce=str, choices=choices, validators=[Optional()])
+    

@@ -12,20 +12,21 @@ from app.models.CalibrationFiles import CalibrationFiles
 from app.models.User import User
 
 from app.forms.CalibrationForm import CalibrationForm, CalibrationFilesForm
-from app.utils.Utils import prepare
+from app.utils.Utils import prepare, load_example_data
 
 @app.route("/calibration/new",methods=['POST','GET'])
 @login_required
 def newCalibration():
     form = CalibrationForm()
     if form.validate_on_submit():
-        # save in database
         calibration_data = Calibration(
             description = form.description.data,
             user_id = current_user.get_id()
         )
         db.session.add(calibration_data)
         db.session.commit()
+        if(form.init_type.data == "example"):
+            load_example_data(calibration_data.id)
         return redirect(url_for('showCalibration',id=calibration_data.id))
     return render_template('calibration/new.html',form=form)
 

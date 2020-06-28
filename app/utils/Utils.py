@@ -3,9 +3,35 @@ import os
 import pathlib
 from app import app, db, lm
 import numpy
+import pandas as pd 
 
-from app.elemental_analysis_tools_temp import *
+from app.elemental_analysis_tools_temp import winqxas, micromatter, shimadzu
 from app.elemental_analysis_tools_temp.responseFactor import responseFactor
+from app.models.CalibrationFiles import CalibrationFiles
+
+def load_example_data(calibration_id):
+
+    micromatter = pd.read_csv(os.path.join(os.path.dirname(__file__), 'micromatter-table-iag.csv'))
+    for index, row in micromatter.iterrows():
+        serial = str(row['serial'])
+        calibration_files_data = CalibrationFiles(
+            csv_file = 'example/csv/' + serial + '.csv',
+            txt_file = 'example/txt/' + serial + '.txt',
+            standard_target = serial,
+            calibration_id = calibration_id
+        )
+        db.session.add(calibration_files_data)
+        db.session.commit()
+        
+
+    calibration_files_data = CalibrationFiles(
+        csv_file = 'example/csv/34662.csv',
+        txt_file = 'example/txt/34662.txt',
+        standard_target = 34662,
+        calibration_id = calibration_id
+    )
+    db.session.add(calibration_files_data)
+    db.session.commit()
 
 def prepare(uploads):
     """
