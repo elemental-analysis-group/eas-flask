@@ -33,7 +33,12 @@ def delete_calibration_files(id):
     calibration_files = CalibrationFiles.query.filter_by(id=id).first()
     calibration_id = calibration_files.calibration_id
 
+    # Deleta arquivo
+    pathlib.Path(app.config['FILES']+calibration_files.csv_file).unlink()
+    pathlib.Path(app.config['FILES']+calibration_files.txt_file).unlink()
+
+    # Delete no banco de dados
     CalibrationFiles.query.filter_by(id=id).delete()
     db.session.commit()
-
+    
     return redirect(url_for('showCalibration',id=calibration_id))

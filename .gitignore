@@ -6,3 +6,4 @@ files
 
 .virtualenv
 config.py
+.ipynb_checkpoints

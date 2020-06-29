@@ -7,12 +7,12 @@
         </td>
     </thead>
     <tbody>
-        {% for i in range(0,response_factors_final['Z']|length) %} 
-            <tr>
-                <td>{{  response_factors_final['Z'][i]|int }} </td>
-                <td>{{  "%.2E" % response_factors_final['Y'][i] }} </td>
-                <td>{{  "%.2E" % response_factors_final['Yerror'][i] }} </td>
-            </tr>
-        {% endfor %}
+        {% for key,row in response_factors.iterrows() %} 
+        <tr>
+            <td>{{ row['Z']|int }}</td>
+            <td>{{ "%.2E" % row['Y'] }}</td>
+            <td>{{ "%.2E" % row['Yerror'] }}</td>
+        </tr>
+    {% endfor %}
     </tbody>
 </table>

@@ -11,11 +11,13 @@
             <tr>
                 <td><a href="/calibration_files/{{i.id}}"> {{ i.standard_target }} </a></td>
                 <td>
-                {% for element in elements[i.standard_target] %}
-                    <b>{{ element }}</b>: {{ "%.2E" % ResponseFactors[i.standard_target][element] }} +/-
-                    {{ "%.1E" % ResponseFactorsErrors[i.standard_target][element] }}
-                    <br>
-                {% endfor %}
+                    {% for rows in response_factors[ response_factors.serial == i.standard_target].iterrows() %}
+                        {% for row in rows %}
+                            {% if row['Z'] is defined %}
+                                <b>{{ row['Z']|int }}</b>: {{ "%.2E" % row['Y'] }} +/- {{ "%.2E" %  row['Yerror'] }}<br>
+                            {% endif %}
+                        {% endfor %}   
+                    {% endfor %}
                 </td>
                 <td>
                     <a href="/calibration_files/{{i.id}}/delete"><i class="fas fa-trash-alt"></i></a>

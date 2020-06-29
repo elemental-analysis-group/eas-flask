@@ -19,11 +19,11 @@ def plot(id):
 
     calibration = Calibration.query.filter_by(id=id).first()
     uploads = CalibrationFiles.query.filter_by(calibration_id=calibration.id).all()
-    info, elements, ResponseFactors, ResponseFactorsErrors,response_factors_final = prepare(uploads)
+    response_factors = prepare(uploads)
 
-    Z = response_factors_final['Z']
-    Y = response_factors_final['Y']
-    Yerror = response_factors_final['Yerror']
+    Z = response_factors['Z']
+    Y = response_factors['Y']
+    Yerror = response_factors['Yerror']
     plt = plotFit(Z,Y,Yerror,start=11,end=50,degree=10,fit=False)
     fig = plt.gcf()
 

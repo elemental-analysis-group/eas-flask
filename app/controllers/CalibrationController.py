@@ -71,15 +71,11 @@ def showCalibration(id):
     # get all uploaded files from this calibration
     uploads = CalibrationFiles.query.filter_by(calibration_id=calibration.id).all()
     
-    info, elements, ResponseFactors, ResponseFactorsErrors,response_factors_final = prepare(uploads)
-    
+    response_factors = prepare(uploads)
+
     return render_template('calibration/show.html',
             calibration=calibration,
             form=form,
-            info=info,
             uploads = uploads,
-            elements = elements,
-            ResponseFactors = ResponseFactors,
-            response_factors_final = response_factors_final,
-            ResponseFactorsErrors = ResponseFactorsErrors
+            response_factors = response_factors
     )
