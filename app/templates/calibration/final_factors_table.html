@@ -10,9 +10,11 @@
         {% for key,row in response_factors.iterrows() %} 
         <tr>
             <td>{{ row['Z']|int }}</td>
-            <td>{{ "%.2E" % row['Y'] }}</td>
-            <td>{{ "%.2E" % row['Yerror'] }}</td>
+            <td>{{ "%1.2E" % row['Y'] }}</td>
+            <td>{{ "%1.2E" % row['Yerror'] }}</td>
         </tr>
     {% endfor %}
     </tbody>
+    
 </table>
+

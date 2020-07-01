@@ -6,15 +6,30 @@
 
 <div class="row">
 
-    <div class="col-xs-6 col-md-6">
-        {% include 'calibration/final_factors_table.html' %}
+    
+    <div class="col-xs-3 col-md-3">
+        <h3>Linha K</h3>
+        {% with response_factors=response_factors_K %}
+            {% include 'calibration/final_factors_table.html' %}
+        {% endwith %}
+    </div>
+
+    <div class="col-xs-3 col-md-3">
+        <h3>Linha L</h3>
+        {% with response_factors=response_factors_L %}
+            {% include 'calibration/final_factors_table.html' %}
+        {% endwith %}
     </div>
 
     <div class="col-xs-6 col-md-6">
-        <img class="col-md-12" src="/plot/{{ calibration.id }}"> 
+        {% include 'calibration/fit.html' %}
+        <br><br>
+        <h4>Baixar fatores de respostas do último ajuste:</h4>
+        <a href="/export/K/{{ calibration.id }}?grau={{request.args.get('grau_K')}}" class="btn btn-info"> Linha K</a>
+        <br><br>
+        <a href="/export/L/{{ calibration.id }}?grau={{request.args.get('grau_L')}}" class="btn btn-info"> Linha L</a>
     </div>
 </div>
-
 
 <div class="row">
     <div class="col-sm">
@@ -27,10 +42,14 @@
         </div>
         <br>
         <div class="card">
-            <div class="card-header"><b>Arquivos Enviados:</b></div>
-            <div class="card-body">
-                {% include 'calibration_files/table.html' %}
-            </div>
+            <div class="card-header"><b>Arquivos Enviados</b></div>
+            
+                <div class="card-body">
+                    <div class="col-xs-12 col-md-12">
+                        {% include 'calibration_files/table.html' %}
+                    </div>
+
+                </div>
         </div>
     </div>
 </div>

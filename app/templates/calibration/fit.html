@@ -1,0 +1,10 @@
+
+<img class="col-md-12" src="/plot/K/{{ calibration.id }}?grau_K={{request.args.get('grau_K')}}">
+<img class="col-md-12" src="/plot/L/{{ calibration.id }}?grau_L={{request.args.get('grau_L')}}">
+
+<form method="GET" action="/calibration/{{ calibration.id }}">
+    {{ form.csrf_token }}
+    Ajuste do fit linha K: <input type="text" name="grau_K" value="{{ request.args.get('grau_K','') }}" ><br><br>
+    Ajuste do fit linha L: <input type="text" name="grau_L" value="{{ request.args.get('grau_L','') }}" ><br><br>
+    <button type="submit" class="btn btn-success" > Ajustar</button>
+</form>

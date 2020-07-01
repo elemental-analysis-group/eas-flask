@@ -2,7 +2,8 @@
     <thead>
         <tr>
             <th>Micromatter</th>
-            <th>Z: R +- error</th>
+            <th>LinhaK Z: R +- error</th>
+            <th>LinhaK L: R +- error</th>
             <th>Actions</th>
         </td>
     </thead>
@@ -11,14 +12,17 @@
             <tr>
                 <td><a href="/calibration_files/{{i.id}}"> {{ i.standard_target }} </a></td>
                 <td>
-                    {% for rows in response_factors[ response_factors.serial == i.standard_target].iterrows() %}
-                        {% for row in rows %}
-                            {% if row['Z'] is defined %}
-                                <b>{{ row['Z']|int }}</b>: {{ "%.2E" % row['Y'] }} +/- {{ "%.2E" %  row['Yerror'] }}<br>
-                            {% endif %}
-                        {% endfor %}   
-                    {% endfor %}
+                    {% with response_factors=response_factors_K %}
+                        {% include 'calibration_files/uploads.html' %}
+                    {% endwith %}
                 </td>
+               
+                <td>
+                    {% with response_factors=response_factors_L %}
+                        {% include 'calibration_files/uploads.html' %}
+                    {% endwith %}
+                </td>
+                
                 <td>
                     <a href="/calibration_files/{{i.id}}/delete"><i class="fas fa-trash-alt"></i></a>
                 </td>

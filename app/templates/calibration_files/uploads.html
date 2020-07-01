@@ -1,0 +1,8 @@
+
+{% for rows in response_factors[ response_factors.serial == i.standard_target].iterrows() %}
+    {% for row in rows %}
+        {% if row['Z'] is defined %}
+            <b>{{ row['Z']|int }}</b>: {{ "%.2E" % row['Y'] }} +/- {{ "%.2E" %  row['Yerror'] }}<br>
+        {% endif %}
+    {% endfor %}   
+{% endfor %}

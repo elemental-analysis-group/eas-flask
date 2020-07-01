@@ -2,7 +2,7 @@ import sys
 import os
 import pathlib
 
-from flask import render_template, flash, url_for, redirect
+from flask import render_template, flash, url_for, redirect, request
 from flask_login import login_user, logout_user, login_required,current_user
 from app import app, db, lm
 from werkzeug.utils import secure_filename
@@ -71,11 +71,12 @@ def showCalibration(id):
     # get all uploaded files from this calibration
     uploads = CalibrationFiles.query.filter_by(calibration_id=calibration.id).all()
     
-    response_factors = prepare(uploads)
+    response_factors_K, response_factors_L = prepare(uploads)
 
     return render_template('calibration/show.html',
             calibration=calibration,
             form=form,
             uploads = uploads,
-            response_factors = response_factors
+            response_factors_K = response_factors_K,
+            response_factors_L = response_factors_L
     )

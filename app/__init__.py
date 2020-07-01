@@ -17,5 +17,5 @@ manager.add_command('db', MigrateCommand)
 lm = LoginManager()
 lm.init_app(app)
 
-from app.controllers import default, CalibrationController, CalibrationFilesController, PlotsController
+from app.controllers import default, CalibrationController, CalibrationFilesController, FitController
 from app.models import User, Calibration, CalibrationFiles

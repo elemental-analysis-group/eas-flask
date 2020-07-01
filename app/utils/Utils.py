@@ -18,9 +18,9 @@ def load_example_data(calibration_id):
     for index, row in micromatter_data.iterrows():
 
         # Remover alguns serials
-        removidos = [34667,34668, 34686, 34687]
-        if(row['serial'] in removidos or row['serial'] > 34690):
-            continue
+        #removidos = [34667,34668, 34686, 34687]
+        #if(row['serial'] in removidos or row['serial'] > 34690):
+        #    continue
 
         serial = str(row['serial'])
 
@@ -52,11 +52,10 @@ def prepare(uploads):
     micromatter_file = pathlib.Path(file_path).read_text()
 
     micromatter_data = pd.read_csv(os.path.join(os.path.dirname(__file__), 'micromatter-table-iag.csv'))
-    response_factors = pd.DataFrame()
+    response_factors_K = pd.DataFrame(columns=['serial','Z','Y','Yerror'])
+    response_factors_L = pd.DataFrame(columns=['serial','Z','Y','Yerror'])
 
     for i in uploads:
-
-        # 1. Para o serial em questão, i.standard_target, procurar a densidade padrão dos elementos do alvo
 
         # 2. Ler arquivos txt e csv correspondentes
         txt_content = pathlib.Path( app.config['FILES'] + '/' + i.txt_file).read_text()
@@ -73,15 +72,50 @@ def prepare(uploads):
             density = row[j[1]].values[0]
 
             if not math.isnan(element):
-                N = float(txt_info['K']['peaks'][element])       
-                sigma_N = float(txt_info['K']['errors'][element])
-                R, sigma_R = responseFactor(N, density,csv_info['current'],csv_info['livetime'],sigma_N)
+                try:
+                    N = float(txt_info['K']['peaks'][element])       
+                    sigma_N = float(txt_info['K']['errors'][element])
+                    R, sigma_R = responseFactor(N, density,csv_info['current'],csv_info['livetime'],sigma_N)
 
-                response_factors = response_factors.append({
-                    'serial': i.standard_target,
-                    'Z': element , 
-                    'Y': R , 
-                    'Yerror': sigma_R
-                    }, ignore_index=True)
+                    response_factors_K = response_factors_K.append({
+                        'serial': i.standard_target,
+                        'Z': element , 
+                        'Y': R , 
+                        'Yerror': sigma_R
+                        }, ignore_index=True)
+                except:
+                    pass
 
-    return response_factors
+            # Vou repetir por pura preguiça... mas é o memos de cima, trocando linha K por L
+                try:
+                    N = float(txt_info['L']['peaks'][element])       
+                    sigma_N = float(txt_info['L']['errors'][element])
+                    R, sigma_R = responseFactor(N, density,csv_info['current'],csv_info['livetime'],sigma_N)
+
+                    response_factors_L = response_factors_L.append({
+                        'serial': i.standard_target,
+                        'Z': element , 
+                        'Y': R , 
+                        'Yerror': sigma_R
+                        }, ignore_index=True)
+                except:
+                    pass
+
+    response_factors_K["Z"] = response_factors_K["Z"].astype(int)
+    response_factors_L["Z"] = response_factors_L["Z"].astype(int)
+    return response_factors_K, response_factors_L
+
+def response_factors_medias(response_factors):
+    aux = pd.DataFrame(columns=['Z','Y','Yerror'])
+
+    elements = numpy.unique(response_factors['Z'])
+    for element in elements:
+        rows = response_factors[response_factors.Z == element]
+        aux = aux.append({
+            'Z': element , 
+            'Y': rows.Y.mean() , 
+            'Yerror': math.sqrt(numpy.square(rows.Yerror).sum())
+        }, ignore_index=True)
+
+    aux["Z"] = aux["Z"].astype(int)
+    return aux

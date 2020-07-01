@@ -80,7 +80,7 @@ def plotFit(Z,Y,Yerror,start=11,end=42,degree=9,fit=False):
     plt.clf()
 
     #Elemento no eixo X
-    plt.xlim(start,end)
+    plt.xlim(start-2,end+5)
 
     #Colocando Título
     plt.title('Linha K')
@@ -90,7 +90,7 @@ def plotFit(Z,Y,Yerror,start=11,end=42,degree=9,fit=False):
     plt.xlabel('Z')
 
     #Limites do eixo Y (eixo do fator de resposta)
-    #plt.ylim(min(Yadjusted)-0.05,max(Yadjusted)+0.05)
+    #plt.ylim(min(Y)-0.05,max(Y)+0.05)
 
     #Plot dos pontos experimentais
     plt.plot(Z,Y,'bD')
