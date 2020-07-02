@@ -33,7 +33,7 @@ def plotK(id):
     Y = response_factors['Y']
     Yerror = response_factors['Yerror']
 
-    plt = plotFit(Z,Y,Yerror,start=min(Z),end=max(Z),degree=int(grau),fit=fit,'K')
+    plt = plotFit(Z,Y,Yerror,start=min(Z),end=max(Z),degree=int(grau),fit=fit,line='K')
     fig = plt.gcf()
 
     # Faz a mágica para devolver um response do tipo imagem
@@ -64,7 +64,7 @@ def plotL(id):
     Y = response_factors['Y']
     Yerror = response_factors['Yerror']
 
-    plt = plotFit(Z,Y,Yerror,start=min(Z),end=max(Z),degree=int(grau),fit=fit,'L')
+    plt = plotFit(Z,Y,Yerror,start=min(Z),end=max(Z),degree=int(grau),fit=fit,line='L')
     fig = plt.gcf()
 
     # Faz a mágica para devolver um response do tipo imagem
