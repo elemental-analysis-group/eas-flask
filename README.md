@@ -34,7 +34,7 @@ Exemplo de para serviço em ~/.config/systemd/user/edx.service:
 
     [Service]
     Environment=TZ=America/Sao_Paulo
-    ExecStart=/home/edx/elemental_analysis_tools_flask/.virtualenv/bin/gunicorn --bind 0.0.0.0:8000  -w 2 app:app
+    ExecStart=/home/edx/elemental_analysis_tools_flask/.virtualenv/bin/python3.7 /home/edx/elemental_analysis_tools_flask/.virtualenv/bin/gunicorn --bind 0.0.0.0:8000  -w 2 app:app
     ExecStop=/bin/kill -INT $MAINPID
     ExecReload=/bin/kill -TERM $MAINPID
     Restart=on-failure
