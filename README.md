@@ -31,19 +31,27 @@ Exemplo de para serviço em ~/.config/systemd/user/edx.service:
 
     [Unit]
     Description=iag usp
+    After=network.target
 
     [Service]
-    Environment=TZ=America/Sao_Paulo
-    ExecStart=/home/edx/elemental_analysis_tools_flask/.virtualenv/bin/python3.7 /home/edx/elemental_analysis_tools_flask/.virtualenv/bin/gunicorn --bind 0.0.0.0:8000  -w 2 app:app
+    WorkingDirectory=/home/edx/elemental_analysis_tools_flask/
+    ExecStart=/home/edx/elemental_analysis_tools_flask/.virtualenv/bin/python3.7 /home/edx/elemental_analysis_tools_flask/.virtualenv/bin/gunicorn --bind 0.0.0.0:8000 -w 2 app:app
     ExecStop=/bin/kill -INT $MAINPID
     ExecReload=/bin/kill -TERM $MAINPID
-    Restart=on-failure
-    
+    Restart=always
+
     [Install]
     WantedBy=default.target
 
 
-47342
+
+Serviço:
+
+    systemctl  daemon-reload --user
+    systemctl enable edx.service --user
+    systemctl start edx.service --user
+
+    47342
 
     apt install python3-pip python3-venv python3-virtualenv git mariadb-server
     pip3 install --upgrade virtualenv
