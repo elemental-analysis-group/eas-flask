@@ -94,16 +94,14 @@ def download(line,id):
     Z = response_factors['Z']
     Y = response_factors['Y']
     Yerror = response_factors['Yerror']
-    coefficients = fitResponseFactor(Z,Y,Yerror,start=min(Z),end=max(Z),degree=int(grau))['coefficients']
 
-    # Construir o dataframe de saída
-    #aux = pd.DataFrame(columns=['serial','Z','Y','Yerror'])
-    # Falta calcular para cada z ...
+    export = fitResponseFactor(Z,Y,Yerror,start=min(Z),end=max(Z),degree=int(grau))['export']
+    print(export)
 
     # Retorno do csv
     output = StringIO()
     filename = line + ".csv"
-    response_factors.to_csv(output, header=False, index=False, encoding='utf-8')
+    export.to_csv(output, header=False, index=False, encoding='utf-8')
     csv_output = output.getvalue()
     output.close()
 
@@ -111,5 +109,3 @@ def download(line,id):
     resp.headers["Content-Disposition"] = ("attachment; filename=%s" % filename)
     resp.headers["Content-Type"] = "text/csv"
     return resp
-
-#    coefficients = fitResponseFactor(Z,Y,Yerror,start,end,degree)['coefficients']

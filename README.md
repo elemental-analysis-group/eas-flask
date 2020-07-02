@@ -41,3 +41,6 @@ Atualizar tudo do requiriments:
 
     pip install --ignore-installed -r requirements.txt
     pip3 freeze > requirements.txt
+
+
+    gunicorn -w 2 app:app

@@ -12,7 +12,7 @@ from app.models.CalibrationFiles import CalibrationFiles
 from app.models.User import User
 
 from app.forms.CalibrationForm import CalibrationForm, CalibrationFilesForm
-from app.utils.Utils import prepare, load_example_data
+from app.utils.Utils import prepare, load_example_data, response_factors_medias
 
 @app.route("/calibration/new",methods=['POST','GET'])
 @login_required
@@ -67,16 +67,20 @@ def showCalibration(id):
 
         return redirect(url_for('showCalibration',id=calibration.id))
 
-    
     # get all uploaded files from this calibration
     uploads = CalibrationFiles.query.filter_by(calibration_id=calibration.id).all()
     
     response_factors_K, response_factors_L = prepare(uploads)
+
+    response_factors_medias_K = response_factors_medias(response_factors_K)
+    response_factors_medias_L = response_factors_medias(response_factors_L)
 
     return render_template('calibration/show.html',
             calibration=calibration,
             form=form,
             uploads = uploads,
             response_factors_K = response_factors_K,
-            response_factors_L = response_factors_L
+            response_factors_medias_K = response_factors_medias_K,
+            response_factors_L = response_factors_L,
+            response_factors_medias_L = response_factors_medias_L,
     )

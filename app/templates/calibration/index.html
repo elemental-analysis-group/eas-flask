@@ -9,15 +9,15 @@
         <table class="table table-condensed">
             <thead>
                 <tr>
-                    <th>description</th>
-                    <th>user</th>
+                    <th>Nome dado a calibração</th>
+                    <th></th>
                 </tr>
             </thead>   
             <tbody>
                 {% for calibration in calibrations %}
                 <tr>
                     <td> <a href="{{ calibration.id}}">{{ calibration.description }}</a></td> 
-                    <td> {{ calibration.user_id }} </td> 
+                    <td> {# calibration.user_id #} </td> 
                 </tr>
                 {% endfor %}
             </tbody>

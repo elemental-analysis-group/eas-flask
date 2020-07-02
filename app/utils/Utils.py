@@ -106,6 +106,7 @@ def prepare(uploads):
     return response_factors_K, response_factors_L
 
 def response_factors_medias(response_factors):
+
     aux = pd.DataFrame(columns=['Z','Y','Yerror'])
 
     elements = numpy.unique(response_factors['Z'])
