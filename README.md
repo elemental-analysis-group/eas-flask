@@ -34,7 +34,7 @@ Exemplo de para serviço em ~/.config/systemd/user/edx.service:
 
     [Service]
     Environment=TZ=America/Sao_Paulo
-    ExecStart=/home/edx/elemental_analysis_tools_flask/.virtualenv/bin/gunicorn -w 2 app:app
+    ExecStart=/home/edx/elemental_analysis_tools_flask/.virtualenv/bin/gunicorn --bind 0.0.0.0:8000  -w 2 app:app
     ExecStop=/bin/kill -INT $MAINPID
     ExecReload=/bin/kill -TERM $MAINPID
     Restart=on-failure
@@ -42,6 +42,12 @@ Exemplo de para serviço em ~/.config/systemd/user/edx.service:
     [Install]
     WantedBy=default.target
 
+
+47342
+
+    apt install python3-pip python3-venv python3-virtualenv git mariadb-server
+    pip3 install --upgrade virtualenv
+    hash -r
 
     
 

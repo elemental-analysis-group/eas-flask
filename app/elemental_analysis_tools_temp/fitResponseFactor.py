@@ -77,7 +77,7 @@ def fitResponseFactor(Z,Y,Yerror, start=11,end=42, degree = 9):
         'export': export
     })
 
-def plotFit(Z,Y,Yerror,start=11,end=42,degree=9,fit=False):
+def plotFit(Z,Y,Yerror,start=11,end=42,degree=9,fit=False, line='K'):
 
     plt.figure(1)
 
@@ -88,7 +88,7 @@ def plotFit(Z,Y,Yerror,start=11,end=42,degree=9,fit=False):
     plt.xlim(start-2,end+5)
 
     #Colocando Título
-    plt.title('Linha K')
+    plt.title('Linha ' + str(line))
 
     # Labels
     plt.ylabel('Fator de Resposta')
